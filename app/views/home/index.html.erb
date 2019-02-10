@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <%= form_tag home_index_path, method: :get do %>
+        <div class="form-group">
+          <%= text_field_tag :search_terms, params[:search_terms], class: "form-control", placeholder: "Please input terms" %>
+        </div>
+        <%= submit_tag "Search", name: nil, class: "btn btn-primary btn-md" %>
+      <% end %>
+    </div>
+    <div class="col-sm-9">
+      <% if @repos_list.present? %>
+        <table class="table" id="repos">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Full name</th>
+              <th class="text-right">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% @repos_list.each do |repo_hash| %>
+                <tr>
+                  <td class="name"><%= repo_hash['name'] %></td>
+                  <td class="full-name text-right"><%= repo_hash['full_name'] %></td>
+                  <td class="text-right description"><%= repo_hash['description'] %></td>
+                </tr>
+              <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>There is no data in search</p>
+      <% end %>
+    </div>
+  </div>
+</div>
